@@ -170,6 +170,7 @@ class GlobalStatsView extends StatelessWidget {
                       unselectedColor:
                           Colors.grey, // Color de las barras no seleccionadas
                     ),
+                    dataLabelMapper: (ChartData data, _) => '${data.value} min',
                   ),
                 ],
               ),
