@@ -71,19 +71,19 @@ class GlobalStatsView extends StatelessWidget {
       value: 'S/.20.00',
       color: Colors.green,
     ),
-    const DashboardCard(
+    DashboardCard(
       icon: Icons.attach_money,
       title: 'Guantes',
       value: 'S/.5.00',
       color: Colors.orange,
     ),
-    const DashboardCard(
+    DashboardCard(
       icon: Icons.attach_money,
       title: 'Chompas',
       value: 'S/.25.00',
       color: Colors.purple,
     ),
-    const DashboardCard(
+    DashboardCard(
       icon: Icons.attach_money,
       title: 'Chalinas',
       value: 'S/.15.00',
