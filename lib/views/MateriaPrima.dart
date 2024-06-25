@@ -8,6 +8,8 @@ class Material {
 }
 
 class MateriaPrimaPage extends StatefulWidget {
+  const MateriaPrimaPage({super.key});
+
   @override
   _MateriaPrimaPageState createState() => _MateriaPrimaPageState();
 }
@@ -41,7 +43,7 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: Text('Agregar Nuevo Material'),
+        title: const Text('Agregar Nuevo Material'),
         content: Form(
           key: _formKey,
           child: Column(
@@ -49,7 +51,7 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
             children: <Widget>[
               TextFormField(
                 controller: _nombreController,
-                decoration: InputDecoration(labelText: 'Nombre del Material'),
+                decoration: const InputDecoration(labelText: 'Nombre del Material'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, ingrese el nombre del material';
@@ -59,8 +61,8 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
               ),
               TextFormField(
                 controller: _costoController,
-                decoration: InputDecoration(labelText: 'Costo'),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                decoration: const InputDecoration(labelText: 'Costo'),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, ingrese el costo';
@@ -77,11 +79,11 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
         actions: <Widget>[
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
           ),
           ElevatedButton(
             onPressed: _agregarMaterial,
-            child: Text('Agregar'),
+            child: const Text('Agregar'),
           ),
         ],
       ),
@@ -92,7 +94,7 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Materia Prima'),
+        title: const Text('Materia Prima'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -112,10 +114,10 @@ class _MateriaPrimaPageState extends State<MateriaPrimaPage> {
                 },
               ),
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             ElevatedButton(
               onPressed: _mostrarFormularioAgregarMaterial,
-              child: Text('Agregar Nuevo Material'),
+              child: const Text('Agregar Nuevo Material'),
             ),
           ],
         ),

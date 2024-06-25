@@ -1,9 +1,11 @@
-import 'package:firebase_auth/firebase_auth.dart'; // Importa Firebase Auth
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:raymisa/conexion/database_service.dart';
-import 'package:raymisa/menu/Inicio.dart'; // Importa la página de inicio
+import 'package:raymisa/widgets/bottom_nav_bar.dart'; // Asegúrate de importar BottomNavBar
 
 class LoginPage extends StatefulWidget {
+  const LoginPage({super.key});
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -13,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final _passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  String _connectionStatus = ''; // Variable para almacenar el estado de la conexión
+  String _connectionStatus = '';
 
   @override
   void initState() {
@@ -36,20 +38,17 @@ class _LoginPageState extends State<LoginPage> {
       });
       if (isConnected) {
         try {
-          // 1. Autenticación con Firebase Authentication
           UserCredential userCredential = await FirebaseAuth.instance.signInWithEmailAndPassword(
             email: _emailController.text,
             password: _passwordController.text,
           );
-          // 2. Si la autenticación es exitosa, navega a la siguiente pantalla
           if (userCredential.user != null) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => Inicio()),
+              MaterialPageRoute(builder: (context) => const BottomNavBar()), // Redirige al BottomNavBar
             );
           }
         } on FirebaseAuthException catch (e) {
-          // 3. Manejo de errores de autenticación
           String errorMessage = 'Error desconocido';
           if (e.code == 'user-not-found') {
             errorMessage = 'Usuario no encontrado';
@@ -57,7 +56,6 @@ class _LoginPageState extends State<LoginPage> {
             errorMessage = 'Contraseña incorrecta';
           }
 
-          // Muestra el mensaje de error (puedes usar un SnackBar, un Dialog, etc.)
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(errorMessage)),
           );
@@ -70,7 +68,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
         centerTitle: true,
       ),
       body: Padding(
@@ -80,14 +78,13 @@ class _LoginPageState extends State<LoginPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 30), // Espacio desde arriba
-              // Agrega la imagen aquí
+              const SizedBox(height: 30),
               Image.asset(
                 'assets/images/logo.png',
-                height: 200, // Aumenta la altura de la imagen
-                width: 200,  // Opcionalmente ajusta el ancho de la imagen
+                height: 200,
+                width: 200,
               ),
-              SizedBox(height: 20), // Espacio debajo de la imagen
+              const SizedBox(height: 20),
               Form(
                 key: _formKey,
                 child: Column(
@@ -96,7 +93,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
                       child: TextFormField(
                         controller: _emailController,
-                        decoration: InputDecoration(labelText: 'Email'),
+                        decoration: const InputDecoration(labelText: 'Email'),
                         validator: (value) {
                           if (value == null || value.isEmpty) {
                             return 'Please enter your email';
@@ -109,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
                       padding: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 50.0),
                       child: TextFormField(
                         controller: _passwordController,
-                        decoration: InputDecoration(labelText: 'Password'),
+                        decoration: const InputDecoration(labelText: 'Password'),
                         obscureText: true,
                         validator: (value) {
                           if (value == null || value.isEmpty) {
@@ -119,12 +116,12 @@ class _LoginPageState extends State<LoginPage> {
                         },
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     ElevatedButton(
                       onPressed: _login,
-                      child: Text('Login'),
+                      child: const Text('Login'),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     Text(
                       _connectionStatus,
                       style: TextStyle(

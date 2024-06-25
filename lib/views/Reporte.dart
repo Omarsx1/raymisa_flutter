@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Reporte extends StatelessWidget {
+  const Reporte({super.key});
+
   @override
   Widget build(BuildContext context) {
     // Ejemplo de datos de reportes con costos por tipo de prenda
@@ -30,7 +32,7 @@ class Reporte extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Generar Reporte'),
+        title: const Text('Generar Reporte'),
         centerTitle: true,
       ),
       body: Padding(
@@ -38,11 +40,11 @@ class Reporte extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               'Reportes Generados',
               style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Expanded(
               child: ListView.builder(
                 itemCount: reportes.length,
@@ -50,12 +52,12 @@ class Reporte extends StatelessWidget {
                   var reporte = reportes[index];
                   return Card(
                     elevation: 3.0,
-                    margin: EdgeInsets.symmetric(vertical: 8.0),
+                    margin: const EdgeInsets.symmetric(vertical: 8.0),
                     child: ListTile(
-                      leading: Icon(Icons.insert_drive_file),
+                      leading: const Icon(Icons.insert_drive_file),
                       title: Text(reporte['titulo']),
                       subtitle: Text(reporte['descripcion']),
-                      trailing: Icon(Icons.arrow_forward_ios),
+                      trailing: const Icon(Icons.arrow_forward_ios),
                       onTap: () {
                         Navigator.push(
                           context,
@@ -77,8 +79,8 @@ class Reporte extends StatelessWidget {
                 onPressed: () {
                   // Lógica para generar un nuevo reporte
                 },
-                icon: Icon(Icons.add),
-                label: Text('Generar Nuevo Reporte'),
+                icon: const Icon(Icons.add),
+                label: const Text('Generar Nuevo Reporte'),
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
@@ -97,7 +99,7 @@ class DetalleReporte extends StatelessWidget {
   final String reporte;
   final Map<String, double> detalles;
 
-  DetalleReporte({required this.reporte, required this.detalles});
+  const DetalleReporte({super.key, required this.reporte, required this.detalles});
 
   @override
   Widget build(BuildContext context) {
@@ -113,9 +115,9 @@ class DetalleReporte extends StatelessWidget {
           children: [
             Text(
               'Detalles de $reporte',
-              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Expanded(
               child: ListView(
                 children: detalles.entries.map((entry) {
@@ -131,8 +133,8 @@ class DetalleReporte extends StatelessWidget {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                icon: Icon(Icons.arrow_back),
-                label: Text('Regresar'),
+                icon: const Icon(Icons.arrow_back),
+                label: const Text('Regresar'),
                 style: ElevatedButton.styleFrom(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),

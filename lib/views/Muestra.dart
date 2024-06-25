@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Muestra extends StatefulWidget {
+  const Muestra({super.key});
+
   @override
   _MuestraState createState() => _MuestraState();
 }
@@ -14,12 +16,12 @@ class _MuestraState extends State<Muestra> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Registrar Colección de Prendas'),
+        title: const Text('Registrar Colección de Prendas'),
         centerTitle: true,
       ),
       body: ListView.builder(
         itemCount: 6, // Suponiendo que hay 6 colecciones
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         itemBuilder: (context, index) {
           String coleccion = 'Colección ${index + 1}';
           if (coleccionesCompletadas.contains(coleccion)) {
@@ -51,10 +53,10 @@ class _MuestraState extends State<Muestra> {
             child: Card(
               elevation: 3.0,
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Text(
                   coleccion,
-                  style: TextStyle(fontSize: 18.0),
+                  style: const TextStyle(fontSize: 18.0),
                 ),
               ),
             ),
@@ -73,7 +75,7 @@ class DetalleColeccion extends StatefulWidget {
   final ValueChanged<List<String>> onSeleccionesCambiadas;
   final VoidCallback onCompletarColeccion; // Cambiar a VoidCallback
 
-  DetalleColeccion({
+  const DetalleColeccion({super.key, 
     required this.coleccion,
     required this.seleccionPorColeccion,
     required this.tiposPrenda,
@@ -163,7 +165,7 @@ class _DetalleColeccionState extends State<DetalleColeccion> {
                   },
                   trailing: checksActivados[tipoPrenda]!
                       ? Icon(Icons.check_circle, color: iconColors[tipoPrenda])
-                      : Icon(Icons.check_circle_outline, color: Colors.grey), // Cambiar a un círculo sin relleno si no está activado
+                      : const Icon(Icons.check_circle_outline, color: Colors.grey), // Cambiar a un círculo sin relleno si no está activado
                 );
               }).toList(),
             ),
@@ -176,7 +178,7 @@ class _DetalleColeccionState extends State<DetalleColeccion> {
                 Navigator.pop(context);
               }
                   : null,
-              child: Text('Completar Colección'),
+              child: const Text('Completar Colección'),
             ),
           ),
         ],
@@ -191,12 +193,12 @@ class FormularioDetallePrenda extends StatefulWidget {
   final Function() onCancel;
 
   const FormularioDetallePrenda({
-    Key? key,
+    super.key,
     required this.tipoPrenda,
     required this.onGuardar,
     required this.
 onCancel,
-  }) : super(key: key);
+  });
 
   @override
   _FormularioDetallePrendaState createState() => _FormularioDetallePrendaState();
@@ -217,22 +219,22 @@ class _FormularioDetallePrendaState extends State<FormularioDetallePrenda> {
     TextEditingController costoController = TextEditingController();
     TextEditingController tiempoController = TextEditingController();
 
-    final _formKey = GlobalKey<FormState>(); // Nuevo GlobalKey para validar el formulario
+    final formKey = GlobalKey<FormState>(); // Nuevo GlobalKey para validar el formulario
 
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: Text('Ingrese Costo y Tiempo para $seleccion'),
         content: Form(
-          key: _formKey,
+          key: formKey,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               TextFormField(
                 controller: costoController,
-                decoration: InputDecoration(labelText: 'Costo'),
-                keyboardType: TextInputType.numberWithOptions(decimal: true),
+                decoration: const InputDecoration(labelText: 'Costo'),
+                keyboardType: const TextInputType.numberWithOptions(decimal: true),
                 validator: (value) {
                   if (value != null && value.isNotEmpty) {
                     return null; // Si el valor no está vacío, es válido
@@ -242,10 +244,10 @@ class _FormularioDetallePrendaState extends State<FormularioDetallePrenda> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: tiempoController,
-                decoration: InputDecoration(labelText: 'Tiempo (horas)'),
+                decoration: const InputDecoration(labelText: 'Tiempo (horas)'),
                 keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value != null && value.isNotEmpty) {
@@ -264,11 +266,11 @@ class _FormularioDetallePrendaState extends State<FormularioDetallePrenda> {
             onPressed: () {
               Navigator.of(context).pop();
             },
-            child: Text('Cancelar'),
+            child: const Text('Cancelar'),
           ),
           ElevatedButton(
             onPressed: () {
-              if (_formKey.currentState!.validate()) {
+              if (formKey.currentState!.validate()) {
                 String costo = costoController.text.trim();
                 String tiempo = tiempoController.text.trim();
 
@@ -279,7 +281,7 @@ class _FormularioDetallePrendaState extends State<FormularioDetallePrenda> {
                 Navigator.of(context).pop(); // Cerrar el diálogo
               }
             },
-            child: Text('Guardar'),
+            child: const Text('Guardar'),
           ),
         ],
       ),
@@ -307,10 +309,10 @@ class _FormularioDetallePrendaState extends State<FormularioDetallePrenda> {
               children: [
                 Text(
                   'Ingrese los detalles de la prenda ${widget.tipoPrenda}:',
-                  style: TextStyle(fontSize: 16.0),
+                  style: const TextStyle(fontSize: 16.0),
                 ),
 
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 // Centrar imagen por defecto
                 Center(
                   child: Image.asset(
@@ -319,11 +321,11 @@ class _FormularioDetallePrendaState extends State<FormularioDetallePrenda> {
                     fit: BoxFit.cover,
                   ),
                 ),
-                SizedBox(height: 40.0),
+                const SizedBox(height: 40.0),
                 //Selector de proceso
                 DropdownButtonFormField<String>(
                   value: _selectedProceso,
-                  hint: Text('Seleccione el proceso'),
+                  hint: const Text('Seleccione el proceso'),
                   items: procesos.map((proceso) {
                     return DropdownMenuItem(
                       value: proceso,
@@ -345,7 +347,7 @@ class _FormularioDetallePrendaState extends State<FormularioDetallePrenda> {
                     return null;
                   },
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 // Mostrar procesos seleccionados
                 Wrap(
                   spacing: 8.0,
@@ -365,12 +367,12 @@ class _FormularioDetallePrendaState extends State<FormularioDetallePrenda> {
                     );
                   }).toList(),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 // Selector de color
                 DropdownButton<String>(
                   isExpanded: true, 
                   value: selectedColor,
-                  hint: Text('Seleccione el color'),
+                  hint: const Text('Seleccione el color'),
                   items: colores.map((color) {
                     return DropdownMenuItem(
                       value: color,
@@ -386,7 +388,7 @@ class _FormularioDetallePrendaState extends State<FormularioDetallePrenda> {
                     });
                   },
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 // Mostrar colores seleccionados
                 Wrap(
                   spacing: 8.0,
@@ -407,7 +409,7 @@ color) {
                     );
                   }).toList(),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 Row(
                   children: [
                     ElevatedButton(
@@ -415,9 +417,9 @@ color) {
                         widget.onCancel();
                         Navigator.pop(context);
                       },
-                      child: Text('Cancelar'),
+                      child: const Text('Cancelar'),
                     ),
-                    SizedBox(width: 16.0),
+                    const SizedBox(width: 16.0),
                     ElevatedButton(
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
@@ -427,7 +429,7 @@ color) {
                           Navigator.pop(context);
                         }
                       },
-                      child: Text('Guardar'),
+                      child: const Text('Guardar'),
                     ),
                   ],
                 ),

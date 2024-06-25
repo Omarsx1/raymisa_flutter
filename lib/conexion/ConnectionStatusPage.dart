@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:raymisa/widgets/Login.dart';
+import 'package:raymisa/widgets/Login.dart'; // Asegúrate de importar LoginPage
 
 class ConnectionStatusPage extends StatelessWidget {
   final bool isConnected;
 
-  const ConnectionStatusPage({required this.isConnected});
+  const ConnectionStatusPage({super.key, required this.isConnected});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Connection Status'),
+        title: const Text('Connection Status'),
         centerTitle: true,
       ),
       body: Center(
@@ -18,19 +18,21 @@ class ConnectionStatusPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             Text(
-              isConnected ? 'Conexión establecida correctamente' : 'No se pudo establecer la conexión',
-              style: TextStyle(fontSize: 20),
+              isConnected
+                  ? 'Conexión establecida correctamente'
+                  : 'No se pudo establecer la conexión',
+              style: const TextStyle(fontSize: 20),
               textAlign: TextAlign.center,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushReplacement(
                   context,
-                  MaterialPageRoute(builder: (context) => LoginPage()),
+                  MaterialPageRoute(builder: (context) => const LoginPage()),
                 );
               },
-              child: Text('Volver al inicio de sesión'),
+              child: const Text('Volver al inicio de sesión'),
             ),
           ],
         ),

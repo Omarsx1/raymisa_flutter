@@ -9,6 +9,8 @@ class Prenda {
 }
 
 class Orden extends StatefulWidget {
+  const Orden({super.key});
+
   @override
   _OrdenState createState() => _OrdenState();
 }
@@ -22,8 +24,8 @@ class _OrdenState extends State<Orden> {
   final _fechaEntregaController = TextEditingController();
   final _nombreColeccionController = TextEditingController(); // Nuevo controlador para el nombre de la colección
   String? _tipoPrenda;
-  List<String> _tiposPrenda = ['Camisa', 'Pantalón', 'Chaqueta', 'Falda'];
-  List<Prenda> _prendasSeleccionadas = [];
+  final List<String> _tiposPrenda = ['Camisa', 'Pantalón', 'Chaqueta', 'Falda'];
+  final List<Prenda> _prendasSeleccionadas = [];
 
   @override
   void initState() {
@@ -39,8 +41,8 @@ class _OrdenState extends State<Orden> {
   }
 
   void _mostrarPrenda(Prenda prenda) {
-    final _disenoController = TextEditingController();
-    final _formKeyDialog = GlobalKey<FormState>();
+    final disenoController = TextEditingController();
+    final formKeyDialog = GlobalKey<FormState>();
 
     showDialog(
       context: context,
@@ -48,14 +50,14 @@ class _OrdenState extends State<Orden> {
         title: Text(prenda.tipo),
         content: SingleChildScrollView(
           child: Form(
-            key: _formKeyDialog,
+            key: formKeyDialog,
             child: Column(
               children: <Widget>[
                 Text('Ingrese el modelo para la prenda: ${prenda.tipo}'),
-                SizedBox(height: 16),
+                const SizedBox(height: 16),
                 TextFormField(
-                  controller: _disenoController,
-                  decoration: InputDecoration(labelText: 'Modelo'),
+                  controller: disenoController,
+                  decoration: const InputDecoration(labelText: 'Modelo'),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
                       return 'Por favor, ingrese el modelo';
@@ -70,18 +72,18 @@ class _OrdenState extends State<Orden> {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
-            child: Text('Cerrar'),
+            child: const Text('Cerrar'),
           ),
           TextButton(
             onPressed: () {
-              if (_formKeyDialog.currentState!.validate()) {
+              if (formKeyDialog.currentState!.validate()) {
                 setState(() {
-                  prenda.modelo = _disenoController.text;
+                  prenda.modelo = disenoController.text;
                 });
                 Navigator.of(context).pop();
               }
             },
-            child: Text('Guardar'),
+            child: const Text('Guardar'),
           ),
         ],
       ),
@@ -117,7 +119,7 @@ class _OrdenState extends State<Orden> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Generar Orden'),
+        title: const Text('Generar Orden'),
         centerTitle: true,
       ),
       body: Padding(
@@ -128,7 +130,7 @@ class _OrdenState extends State<Orden> {
             children: <Widget>[
               TextFormField(
                 controller: _nombreClienteController,
-                decoration: InputDecoration(labelText: 'Nombre del Cliente'),
+                decoration: const InputDecoration(labelText: 'Nombre del Cliente'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, ingrese el nombre del cliente';
@@ -136,22 +138,22 @@ class _OrdenState extends State<Orden> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _fechaEntregaController,
                 decoration: InputDecoration(
                   labelText: 'Fecha',
                   suffixIcon: IconButton(
-                    icon: Icon(Icons.calendar_today),
+                    icon: const Icon(Icons.calendar_today),
                     onPressed: () => _selectDate(context),
                   ),
                 ),
                 readOnly: true,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: _nombreColeccionController,
-                decoration: InputDecoration(labelText: 'Nombre de la Colección'),
+                decoration: const InputDecoration(labelText: 'Nombre de la Colección'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Por favor, ingrese el nombre de la colección';
@@ -159,10 +161,10 @@ class _OrdenState extends State<Orden> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               DropdownButtonFormField<String>(
                 value: _tipoPrenda,
-                decoration: InputDecoration(labelText: 'Tipo de Prenda'),
+                decoration: const InputDecoration(labelText: 'Tipo de Prenda'),
                 items: _tiposPrenda.map((String tipo) {
                   return DropdownMenuItem<String>(
                     value: tipo,
@@ -181,12 +183,12 @@ class _OrdenState extends State<Orden> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'Prendas Seleccionadas:',
                 style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Wrap(
                 spacing: 8.0,
                 children: _prendasSeleccionadas.map((prenda) {
@@ -205,10 +207,10 @@ class _OrdenState extends State<Orden> {
                   );
                 }).toList(),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: _generarOrden,
-                child: Text('Generar Orden'),
+                child: const Text('Generar Orden'),
               ),
             ],
           ),

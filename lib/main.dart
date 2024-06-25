@@ -1,7 +1,7 @@
+import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
-import 'package:flutter/material.dart';
-import 'package:raymisa/conexion/database_service.dart'; // Importa tu servicio de Firestore
+import 'package:dynamic_color/dynamic_color.dart'; // Importa el paquete dynamic_color
 import 'package:raymisa/widgets/Login.dart';
 
 void main() async {
@@ -9,70 +9,45 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Firebase Example',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: LoginPage(), // Carga la página de login
-    );
-  }
-}
-
-class HomePage extends StatefulWidget {
-  @override
-  _HomePageState createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  late DatabaseService _databaseService;
-  String _connectionStatus = '';
-
-  @override
-  void initState() {
-    super.initState();
-    _databaseService = DatabaseService();
-    _connectToFirestore();
-  }
-
-  Future<void> _connectToFirestore() async {
-    final isConnected = await _databaseService.connect();
-    setState(() {
-      _connectionStatus = isConnected ? 'Conexión a Firestore exitosa' : 'Error al conectar a Firestore';
-    });
-  }
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Flutter Firebase Example'),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              _connectionStatus,
-              style: TextStyle(fontSize: 18),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                _connectToFirestore();
-              },
-              child: Text('Reintentar conexión'),
-            ),
-          ],
-        ),
-      ),
+    return DynamicColorBuilder(
+      builder: (ColorScheme? lightDynamic, ColorScheme? darkDynamic) {
+        ColorScheme lightColorScheme;
+        ColorScheme darkColorScheme;
+
+        if (lightDynamic != null && darkDynamic != null) {
+          lightColorScheme = lightDynamic.harmonized();
+          darkColorScheme = darkDynamic.harmonized();
+        } else {
+          lightColorScheme = ColorScheme.fromSwatch(
+            brightness: Brightness.light,
+          );
+          darkColorScheme = ColorScheme.fromSwatch(
+            brightness: Brightness.dark,
+          );
+        }
+
+        return MaterialApp(
+          title: 'Flutter Firebase Example',
+          theme: ThemeData(
+            colorScheme: lightColorScheme,
+            useMaterial3: true,
+          ),
+          darkTheme: ThemeData(
+            colorScheme: darkColorScheme,
+            useMaterial3: true,
+          ),
+          themeMode: ThemeMode.system,
+          home: const LoginPage(), // Carga la página de login
+        );
+      },
     );
   }
 }

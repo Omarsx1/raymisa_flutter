@@ -1,76 +1,78 @@
 import 'package:flutter/material.dart';
 
 class Configuracion extends StatelessWidget {
+  const Configuracion({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Configuración'),
+        title: const Text('Configuración'),
         centerTitle: true,
       ),
       body: ListView(
         children: <Widget>[
           ListTile(
-            leading: Icon(Icons.person),
-            title: Text('Perfil'),
-            subtitle: Text('Editar perfil'),
-            trailing: Icon(Icons.arrow_forward_ios),
+            leading: const Icon(Icons.person),
+            title: const Text('Perfil'),
+            subtitle: const Text('Editar perfil'),
+            trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PerfilPage()),
+                MaterialPageRoute(builder: (context) => const PerfilPage()),
               );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.lock),
-            title: Text('Privacidad'),
-            subtitle: Text('Configuración de privacidad'),
-            trailing: Icon(Icons.arrow_forward_ios),
+            leading: const Icon(Icons.lock),
+            title: const Text('Privacidad'),
+            subtitle: const Text('Configuración de privacidad'),
+            trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => PrivacidadPage()),
+                MaterialPageRoute(builder: (context) => const PrivacidadPage()),
               );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.notifications),
-            title: Text('Notificaciones'),
-            subtitle: Text('Configuración de notificaciones'),
-            trailing: Icon(Icons.arrow_forward_ios),
+            leading: const Icon(Icons.notifications),
+            title: const Text('Notificaciones'),
+            subtitle: const Text('Configuración de notificaciones'),
+            trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => NotificacionesPage()),
+                MaterialPageRoute(builder: (context) => const NotificacionesPage()),
               );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.language),
-            title: Text('Idioma'),
-            subtitle: Text('Seleccionar idioma'),
-            trailing: Icon(Icons.arrow_forward_ios),
+            leading: const Icon(Icons.language),
+            title: const Text('Idioma'),
+            subtitle: const Text('Seleccionar idioma'),
+            trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => IdiomaPage()),
+                MaterialPageRoute(builder: (context) => const IdiomaPage()),
               );
             },
           ),
-          Divider(),
+          const Divider(),
           ListTile(
-            leading: Icon(Icons.info),
-            title: Text('Sobre la app'),
-            subtitle: Text('Información sobre la aplicación'),
-            trailing: Icon(Icons.arrow_forward_ios),
+            leading: const Icon(Icons.info),
+            title: const Text('Sobre la app'),
+            subtitle: const Text('Información sobre la aplicación'),
+            trailing: const Icon(Icons.arrow_forward_ios),
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => SobreAppPage()),
+                MaterialPageRoute(builder: (context) => const SobreAppPage()),
               );
             },
           ),
@@ -83,27 +85,29 @@ class Configuracion extends StatelessWidget {
 // Ejemplo de las páginas individuales de configuración:
 
 class PerfilPage extends StatelessWidget {
+  const PerfilPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Perfil'),
+        title: const Text('Perfil'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
-            TextField(
+            const TextField(
               decoration: InputDecoration(labelText: 'Nombre'),
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(labelText: 'Correo electrónico'),
             ),
             ElevatedButton(
               onPressed: () {
                 // Lógica para guardar la información del perfil
               },
-              child: Text('Guardar'),
+              child: const Text('Guardar'),
             ),
           ],
         ),
@@ -113,25 +117,27 @@ class PerfilPage extends StatelessWidget {
 }
 
 class PrivacidadPage extends StatelessWidget {
+  const PrivacidadPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Privacidad'),
+        title: const Text('Privacidad'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             SwitchListTile(
-              title: Text('Perfil privado'),
+              title: const Text('Perfil privado'),
               value: true,
               onChanged: (bool value) {
                 // Lógica para cambiar la configuración de privacidad
               },
             ),
             SwitchListTile(
-              title: Text('Compartir ubicación'),
+              title: const Text('Compartir ubicación'),
               value: false,
               onChanged: (bool value) {
                 // Lógica para cambiar la configuración de privacidad
@@ -145,25 +151,27 @@ class PrivacidadPage extends StatelessWidget {
 }
 
 class NotificacionesPage extends StatelessWidget {
+  const NotificacionesPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Notificaciones'),
+        title: const Text('Notificaciones'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             SwitchListTile(
-              title: Text('Notificaciones push'),
+              title: const Text('Notificaciones push'),
               value: true,
               onChanged: (bool value) {
                 // Lógica para cambiar la configuración de notificaciones
               },
             ),
             SwitchListTile(
-              title: Text('Notificaciones por correo'),
+              title: const Text('Notificaciones por correo'),
               value: false,
               onChanged: (bool value) {
                 // Lógica para cambiar la configuración de notificaciones
@@ -177,26 +185,28 @@ class NotificacionesPage extends StatelessWidget {
 }
 
 class IdiomaPage extends StatelessWidget {
+  const IdiomaPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Idioma'),
+        title: const Text('Idioma'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: <Widget>[
             ListTile(
-              title: Text('Español'),
-              trailing: Icon(Icons.check),
+              title: const Text('Español'),
+              trailing: const Icon(Icons.check),
               onTap: () {
                 // Lógica para seleccionar el idioma español
               },
             ),
             ListTile(
-              title: Text('Inglés'),
-              trailing: Icon(null),
+              title: const Text('Inglés'),
+              trailing: const Icon(null),
               onTap: () {
                 // Lógica para seleccionar el idioma inglés
               },
@@ -209,14 +219,16 @@ class IdiomaPage extends StatelessWidget {
 }
 
 class SobreAppPage extends StatelessWidget {
+  const SobreAppPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sobre la app'),
+        title: const Text('Sobre la app'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
+      body: const Padding(
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
